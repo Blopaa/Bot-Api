@@ -5,7 +5,7 @@ const {
   findServer,
   deleteServer,
   updateServer,
-} = require("../controllers/controllers");
+} = require("../controllers/ServerControllers");
 const router = Router();
 
 router.route("/").get(getServers).post(createServer);

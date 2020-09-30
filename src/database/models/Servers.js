@@ -1,4 +1,3 @@
-const { strict } = require('assert')
 const {Schema, model} = require('mongoose')
 
 const serverSchema = new Schema({

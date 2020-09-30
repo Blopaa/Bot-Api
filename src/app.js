@@ -11,5 +11,6 @@ app.use(express.json())
 
 //routes
 app.use('/api/servers', require('./routes/servers'))
+app.use('/api/users', require('./routes/users'))
 
 module.exports = app
