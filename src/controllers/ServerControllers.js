@@ -1,5 +1,5 @@
 const ServerCtrl = {};
-const Server = require("../database/models/Servers");
+const Server = require('../database/models/Servers');
 
 ServerCtrl.getServers = async (req, res) => {
   const servers = await Server.find();
@@ -13,9 +13,7 @@ ServerCtrl.createServer = async (req, res) => {
     name: name,
     bot: {
       prefix: bot.prefix,
-      color: {
-        primary: bot.color.prefix,
-      },
+      primaryColor: bot.primaryColor,
     },
     channels: {
       sugerencias: channels.sugerencias,
@@ -27,6 +25,7 @@ ServerCtrl.createServer = async (req, res) => {
       admin: roles.admin,
       invitado: roles.invitado,
       everyone: roles.everyone,
+      verificated: roles.verificated,
     },
     categories: {
       SOPORTE: categories.SOPORTE,
@@ -34,7 +33,7 @@ ServerCtrl.createServer = async (req, res) => {
   });
 
   await newServer.save();
-  res.json({ message: "server created" });
+  res.json({ message: 'server created' });
 };
 
 ServerCtrl.findServer = async (req, res) => {
@@ -46,13 +45,16 @@ ServerCtrl.deleteServer = async (req, res) => {
   await Server.findOneAndDelete({
     serverID: req.params.serverID,
   });
-  res.json({ message: "server deleted" });
+  res.json({ message: 'server deleted' });
 };
 
-ServerCtrl.updateServer = async(req, res) => {
-  const {serverID, name, bot, channels, roles, categories} =  req.body
-  await Server.findOneAndUpdate({serverID: req.params.serverID}, {serverID, name, bot, channels, roles, categories})
-  res.json({message: "server updated"})
-}
+ServerCtrl.updateServer = async (req, res) => {
+  const { serverID, name, bot, channels, roles, categories } = req.body;
+  await Server.findOneAndUpdate(
+    { serverID: req.params.serverID },
+    { serverID, name, bot, channels, roles, categories }
+  );
+  res.json({ message: 'server updated' });
+};
 
 module.exports = ServerCtrl;
